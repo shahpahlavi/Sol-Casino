@@ -1,0 +1,52 @@
+use anchor_lang::prelude::*;
+
+declare_id!("YourProgramID");
+
+#[program]
+pub mod win_fun {
+    use super::*;
+
+    pub fn play_game(ctx: Context<PlayGame>, amount: u64) -> Result<()> {
+        let user = &mut ctx.accounts.user;
+        let house = &mut ctx.accounts.house;
+
+        // Deduct amount from user balance
+        if user.balance < amount {
+            return Err(ErrorCode::InsufficientFunds.into());
+        }
+        user.balance -= amount;
+
+        // Determine outcome and pay user if they win
+        let random_number = clock::Clock::get().unwrap().unix_timestamp as u64 % 10;
+        if random_number > 5 {
+            let winnings = amount * 2;
+            user.balance += winnings;
+        }
+
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct PlayGame<'info> {
+    #[account(mut)]
+    pub user: Account<'info, UserAccount>,
+    #[account(mut)]
+    pub house: Account<'info, HouseAccount>,
+}
+
+#[account]
+pub struct UserAccount {
+    pub balance: u64,
+}
+
+#[account]
+pub struct HouseAccount {
+    pub balance: u64,
+}
+
+#[error_code]
+pub enum ErrorCode {
+    #[msg("Insufficient funds for this bet.")]
+    InsufficientFunds,
+}
