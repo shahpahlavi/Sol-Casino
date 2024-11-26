@@ -5,4 +5,3 @@
   │     ├── wallet.js
   ├── /utils
   │     ├── solana.js
-  │     ├── randomness.js
