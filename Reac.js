@@ -2,9 +2,9 @@
   ├── /src
   │     ├── /components
   │     │     ├── Navbar.js
-  │     │     ├── GameBoard.js
-  │     │     ├── Wallet.js
+  │     │     ├── WalletIntegration.js
+  │     │     ├── GameList.js
+  │     │     ├── GameCard.js
   │     ├── App.js
-  │     ├── styles.css
-  ├── index.html
-  ├── index.js
+  │     ├── index.css
+  │     ├── index.js
