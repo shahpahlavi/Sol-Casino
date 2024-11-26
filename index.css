@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.navbar {
+  background-color: #121212;
+}
+
+.btn-yellow {
+  background-color: #FFC107;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.btn-yellow:hover {
+  transform: scale(1.1);
+}
